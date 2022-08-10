@@ -4,15 +4,22 @@ import Navbar from "./components/Navbar";
 import CartContainer from "./components/CartContainer";
 // items
 import cartItems from "./cart-items";
+
 // redux stuff
 
 //store -stores data,think of state.(in the store  we store our data.)
 //reducer - function that used to update store.
 
+//actions
+import { DECREASE, INCREASE } from "./actions";
+//reducer
+import reducer from "./reducer";
 import { createStore } from "redux";
 //initial store
 const initialStore = {
-  count: 10,
+  cart: cartItems,
+  total: 0,
+  amount: 0,
 };
 //reducer
 //reducer -function that used to update store
@@ -20,22 +27,32 @@ const initialStore = {
 //state -old state/state before update
 //action-what happened/what update
 //return updated old value
-const reducer = (state, action) => {
-  console.log("Hello world");
-  console.log({ state, action });
-  return state;
-};
+
+//dispatch actions
+//dispatch method send actions to the store
+//actions (objects) - MUST HAVE TYPE PROPERTY -What kind of action
+//DON"T MUTATE THE STATE - redux built on IMMUTABILITY (copy)
+
 //create a store
 const store = createStore(reducer, initialStore);
 //get the state from the store
-console.log(store.getState());
+// store.dispatch({ type: DECREASE });
+// store.dispatch({ type: INCREASE });
+// store.dispatch({ type: "CHANGE_NAME" });
+// store.dispatch({ type: "RESET" });
+// store.dispatch({ type: "INCREASE" });
+// store.dispatch({ type: "INCREASE" });
+// store.dispatch({ type: "INCREASE" });
+
+// console.log(store.getState());
 
 function App() {
   // cart setup
 
   return (
     <main>
-      <Navbar cart={store.getState()} />
+      {/* <Navbar cart={store.getState()} /> */}
+      <Navbar />
       <CartContainer cart={cartItems} />
     </main>
   );
