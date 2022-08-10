@@ -11,7 +11,7 @@ import cartItems from "./cart-items";
 //reducer - function that used to update store.
 
 //actions
-import { DECREASE, INCREASE } from "./actions";
+import { DECREASE, INCREASE,CLEAR_CART } from "./actions";
 //reducer
 import reducer from "./reducer";
 import { createStore } from "redux";
