@@ -20,7 +20,6 @@ const Navbar = ({ amount }) => {
 
 //map state values to props
 // this function has access to state
-
 const mapStateToProps = (state) => {
   // console.log(state);
   return {
