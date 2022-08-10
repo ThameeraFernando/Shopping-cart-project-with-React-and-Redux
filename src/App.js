@@ -23,8 +23,8 @@ import { Provider } from "react-redux";
 //initial store
 const initialStore = {
   cart: cartItems,
-  total: 5000,
-  amount: 10,
+  total: 0,
+  amount: 0,
 };
 //reducer
 //reducer -function that used to update store
