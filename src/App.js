@@ -15,11 +15,16 @@ import { DECREASE, INCREASE } from "./actions";
 //reducer
 import reducer from "./reducer";
 import { createStore } from "redux";
+//react-redux library
+//react-redux -provider-wraps app,
+// connect -used in components to access the store
+import { Provider } from "react-redux";
+
 //initial store
 const initialStore = {
   cart: cartItems,
   total: 0,
-  amount: 0,
+  amount: 10,
 };
 //reducer
 //reducer -function that used to update store
@@ -50,11 +55,11 @@ function App() {
   // cart setup
 
   return (
-    <main>
+    <Provider store={store}>
       {/* <Navbar cart={store.getState()} /> */}
       <Navbar />
       <CartContainer cart={cartItems} />
-    </main>
+    </Provider>
   );
 }
 
