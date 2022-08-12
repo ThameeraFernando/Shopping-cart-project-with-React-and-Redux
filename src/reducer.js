@@ -1,6 +1,19 @@
-import { DECREASE, INCREASE, CLEAR_CART, REMOVE, GET_TOTALS } from "./actions";
-
-const reducer = (state, action) => {
+import {
+  DECREASE,
+  INCREASE,
+  CLEAR_CART,
+  REMOVE,
+  GET_TOTALS,
+  TOGGLE_AMOUNT,
+} from "./actions";
+import cartItems from "./cart-items";
+//initial store
+const initialStore = {
+  cart: cartItems,
+  total: 0,
+  amount: 0,
+};
+const reducer = (state = initialStore, action) => {
   if (action.type === CLEAR_CART) {
     // console.log("action type clear cart");
     return { ...state, cart: [] };
@@ -41,21 +54,21 @@ const reducer = (state, action) => {
   if (action.type === DECREASE) {
     const { id, amount } = action.payload;
     console.log("decrease the amount", id);
-    let tempCart = [];
-    if (amount === 1) {
-      tempCart = state.cart.filter((item) => {
-        if (item.id !== id) {
-          return item;
-        }
-      });
-    } else {
-      tempCart = state.cart.map((item) => {
-        if (item.id === id) {
-          return { ...item, amount: item.amount - 1 };
-        }
-        return item;
-      });
-    }
+    // let tempCart = [];
+    // if (amount === 1) {
+    //   tempCart = state.cart.filter((item) => {
+    //     if (item.id !== id) {
+    //       return item;
+    //     }
+    //   });
+    // } else {
+    let tempCart = state.cart.map((item) => {
+      if (item.id === id) {
+        return { ...item, amount: item.amount - 1 };
+      }
+      return item;
+    });
+    // }
     return { ...state, cart: tempCart };
   }
   if (action.type === REMOVE) {
@@ -68,6 +81,25 @@ const reducer = (state, action) => {
       }
     });
     return { ...state, cart: newCart };
+  }
+  //toggle amount
+  if (action.type === TOGGLE_AMOUNT) {
+    const { id, toggle } = action.payload;
+    return {
+      ...state,
+      cart: state.cart.map((item) => {
+        if (item.id === id) {
+          if (toggle === "inc") {
+            return { ...item, amount: item.amount + 1 };
+          }
+          if (toggle === "dec") {
+            return { ...item, amount: item.amount - 1 };
+          }
+        } else {
+          return item;
+        }
+      }),
+    };
   }
   return state;
 };
@@ -91,4 +123,25 @@ export default reducer;
 // if (action.type === "CHANGE_NAME") {
 //   // console.log("action type change name");
 //   return { ...state, name: "Thameera Fernando" };
+// }
+
+// if (action.type === DECREASE) {
+//   const { id, amount } = action.payload;
+//   console.log("decrease the amount", id);
+//   let tempCart = [];
+//   if (amount === 1) {
+//     tempCart = state.cart.filter((item) => {
+//       if (item.id !== id) {
+//         return item;
+//       }
+//     });
+//   } else {
+//     tempCart = state.cart.map((item) => {
+//       if (item.id === id) {
+//         return { ...item, amount: item.amount - 1 };
+//       }
+//       return item;
+//     });
+//   }
+//   return { ...state, cart: tempCart };
 // }

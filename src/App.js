@@ -11,7 +11,7 @@ import cartItems from "./cart-items";
 //reducer - function that used to update store.
 
 //actions
-import { DECREASE, INCREASE,CLEAR_CART } from "./actions";
+import { DECREASE, INCREASE, CLEAR_CART } from "./actions";
 //reducer
 import reducer from "./reducer";
 import { createStore } from "redux";
@@ -39,7 +39,11 @@ const initialStore = {
 //DON"T MUTATE THE STATE - redux built on IMMUTABILITY (copy)
 
 //create a store
-const store = createStore(reducer, initialStore);
+// const store = createStore(reducer,initialStore);
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 //get the state from the store
 // store.dispatch({ type: DECREASE });
 // store.dispatch({ type: INCREASE });
